@@ -1,0 +1,8 @@
+{
+  "appService.zipIgnorePattern": [
+    "node_modules{,/**}",
+    ".vscode{,/**}"
+  ],
+  "appService.defaultWebAppToDeploy": "/subscriptions/39fca58a-e8d8-41ad-afc7-0af49f717f57/resourceGroups/hackathon/providers/Microsoft.Web/sites/edu-consolidation",
+  "appService.deploySubpath": "."
+}
