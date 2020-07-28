@@ -9,6 +9,14 @@ var debug = require('debug')('app:server');
 var http = require('http');
 
 /**
+ * Local values for secrets
+ */
+process.env.twilioAccountSid = "<ACCOUNT_SID>";
+process.env.twilioAuthToken = "<AUTH_TOKEN>";
+process.env.twilioToPhoneNumber = "<PHONENUMBER>";
+process.env.twilioFromPhoneNumber = "<PHONENUMBER>";
+
+/**
  * Get port from environment and store in Express.
  */
 

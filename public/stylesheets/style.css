@@ -1,6 +1,22 @@
 body {
+  background-color: #85c6b2f3;
+  background-image: url('../images/background-removebg.png');
+  margin: 0;
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+} 
+
+h1 {
+  text-align:center;
+  color: #18181a;
+  font-family: "Helvetica Neue", Arial, sans-serif; 
+  font-size: 40px;
+}
+
+h3 {
+  text-align:center;
+  color: #18181a;
+  font-family: "Helvetica Neue", Arial, sans-serif; 
+  font-size: 20px;
 }
 
 a {
