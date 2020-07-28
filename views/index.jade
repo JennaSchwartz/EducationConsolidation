@@ -1,14 +1,7 @@
 extends layout
 
 block content
-  script. 
-    if (window.location.href.includes('access_token')) {
-      var args = window.location.href.split('&');
-      var token = (args[1].split('='))[1];
-      console.log(token);
-    }
   h1= title
-<<<<<<< HEAD
   p Welcome to #{title}
 
   script.
@@ -25,7 +18,7 @@ block content
                     'scope': 'https://www.googleapis.com/auth/classroom.courses.readonly',
                     'include_granted_scopes': 'true',
                     'state': 'pass-through value'};
-          
+
       for (var p in params) {
         var input = document.createElement('input');
         input.setAttribute('type', 'hidden');
@@ -38,6 +31,3 @@ block content
       form.submit();
     }
   button(onClick='signIn()') Sign in to Google Classrooms
-=======
-  h3 Simplify communication with your students and their parents. Alert parents about upcoming or unfinished assignments.
->>>>>>> f79e70ad1697c3e556d8bb3a3704935f58bec306
