@@ -1,0 +1,7 @@
+extends layout
+
+block content
+  h1= title
+  body
+    each val, key in json
+      p !{key}: !{val}
