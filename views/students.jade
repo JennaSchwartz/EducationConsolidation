@@ -1,0 +1,23 @@
+extends layout
+
+block content
+  h1= title
+  table(border='1')
+    thead
+        tr
+            th Student Name
+            th Assignments
+            th Alerts
+    tbody
+        each student in students
+            tr 
+                td=student.name
+                td=table
+                    tbody
+                        each assignment in student.assignments
+                            tr
+                                td=assignment.name
+                                td=assignment.status
+                                td
+                                    form(action="/sendReminder", method="post")
+                                        button(name="sendReminderButton" value=student) Send Reminder to Guardian
