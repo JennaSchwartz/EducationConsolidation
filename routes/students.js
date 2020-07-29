@@ -37,7 +37,7 @@ router.get('/', async function(req, res, next) {
 /* Edit student's guardian info. */
 router.get('/edit', async function(req, res, next) {
   var client = database.getDatabaseClient();
-  database.syncGuardianInfoWithGoogleClassroom(client, getCGGuardianInfo(req.student));
+  await database.syncGuardianInfoWithGoogleClassroom(client, getCGGuardianInfo(req.student));
   var guardian = await database.getGuardian(client, "1");
 
   res.render('student-edit', { title: 'Edit  info', json: guardian }) 
