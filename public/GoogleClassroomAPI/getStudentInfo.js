@@ -11,7 +11,7 @@ module.exports = {
          * Lists the course that the user has access to.
          */
         getCourse() {
-            classroom.courses.list({
+            this.classroom.courses.list({
                 pageSize: 1, 
                 courseStates: 'ACTIVE'
                 }, (err, res) => {
