@@ -21,7 +21,7 @@ block content
                                 td=assignment.status
                 td
                     form(action="/sendReminder", method="post")
-                        button(name="sendReminderButton" value=student) Send Reminder to Guardian
+                        button(name="sendReminderButton" value=student.name) Send Reminder to Guardian
                 td
                     form(action="/students/edit", method="get")
                         button(name="student" value=student.name) Edit Guardian Info
