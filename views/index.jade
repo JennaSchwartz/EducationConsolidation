@@ -1,6 +1,24 @@
 extends layout
 
 block content
+  script. 
+    if (window.location.href.includes('access_token')) {
+      var args = window.location.href.split('&');
+      var token = args[1].split('=')[1];
+      var form = document.createElement('form');
+
+      form.setAttribute('method', 'POST');
+      form.setAttribute('action', '/authenticate');
+
+      var input = document.createElement('input');
+      input.setAttribute('type', 'hidden');
+      input.setAttribute('name', 'access_token');
+      input.setAttribute('value', token);
+      form.appendChild(input);
+
+      document.body.appendChild(form);
+      form.submit();
+    }
   h1= title
   h3 Simplify and manage communications with your students and their parents.
 
@@ -15,7 +33,7 @@ block content
       var params = {'client_id': '61130927439-7pjc5u470gnkbujno0glm7kqjaukq3sj.apps.googleusercontent.com',
                     'redirect_uri': 'http://localhost:3000',
                     'response_type': 'token',
-                    'scope': 'https://www.googleapis.com/auth/classroom.courses.readonly',
+                    'scope': ['https://www.googleapis.com/auth/classroom.courses.readonly', 'https://www.googleapis.com/auth/classroom.courses.readonly'],
                     'include_granted_scopes': 'true',
                     'state': 'pass-through value'};
 
