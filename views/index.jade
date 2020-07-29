@@ -1,12 +1,6 @@
 extends layout
 
 block content
-  script. 
-    if (window.location.href.includes('access_token')) {
-      var args = window.location.href.split('&');
-      var token = (args[1].split('='))[1];
-      console.log(token);
-    }
   h1= title
   p Welcome to #{title}
 
@@ -24,7 +18,7 @@ block content
                     'scope': 'https://www.googleapis.com/auth/classroom.courses.readonly',
                     'include_granted_scopes': 'true',
                     'state': 'pass-through value'};
-          
+
       for (var p in params) {
         var input = document.createElement('input');
         input.setAttribute('type', 'hidden');
