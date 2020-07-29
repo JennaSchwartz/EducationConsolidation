@@ -22,6 +22,7 @@ block content
       document.body.appendChild(form);
       form.submit();
     }
-  button(class="login-button" onClick='signIn()') Sign in via Google Classroom
-  h3
-  button(class="login-button" onClick='goToStudents()') View students in your classroom
+  
+  div(class="button-collection")
+    button(class="login-button" onClick='signIn()')= signInText
+    button(class="login-button" onClick='goToStudents()') View students in your classroom

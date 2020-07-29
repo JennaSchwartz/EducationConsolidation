@@ -8,6 +8,7 @@ body {
   background-image: url('../images/background-removebg.png');
   margin: 0;
   padding: 50px;
+  text-align: center;
 } 
 
 h1 {
@@ -29,7 +30,7 @@ a {
 }
 
 .login-button {
-  display: block;
+  display: inline-block;
   font-family: 'Inter', Arial, sans-serif;
   font-size: 20px;
   text-transform: uppercase;
@@ -40,7 +41,8 @@ a {
   box-shadow: 0 15px 30px rgba(black,.1);
   border: 0;
   cursor: pointer;
-  margin: 0 auto;
+  margin: 20px;
+  vertical-align: middle;
 }
 
 .save-button {
@@ -69,6 +71,7 @@ a {
   box-shadow: 0 15px 30px rgba(black,.1);
   border: 0;
   cursor: pointer;
+  position: fixed;
 }
 
 .edit-info-button {
@@ -122,6 +125,10 @@ a {
 .edit-info-label {
   font-family: 'Inter', Arial, sans-serif;
   font-size: 20px;
+}
+
+.button-collection {
+  text-align: center;
 }
 
 table   {

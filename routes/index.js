@@ -43,9 +43,9 @@ router.get('/', async function(req, res, next) {
       });
 
       var name = await getUserName();
-      res.render('index', { title: 'Welcome ' + name });
+      res.render('index', { title: 'Education Consolidation', signInText: 'Welcome, ' + name });
     }
-    res.render('index', { title: 'Education Consolidation' });
+    res.render('index', { title: 'Education Consolidation', signInText: 'Sign in via Google Classroom' });
 });
 
 router.get('/authenticate', function(req, res, next) {
