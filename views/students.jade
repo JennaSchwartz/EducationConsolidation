@@ -32,6 +32,5 @@ block content
                     a(href="/students/edit") Edit Guardian Info
     
                 td
-                    form(action="/sendReminder", method="post")
-                        button(name="sendReminderButton" class="send-reminder-button" value=student.name) Send Reminder to Guardian
-
+                    form(action="/students/edit", method="get")
+                        button(name="student" value=student.id) Edit Guardian Info

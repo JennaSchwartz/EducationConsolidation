@@ -1,3 +1,5 @@
+const { json } = require("body-parser");
+
 const CosmosClient = require("@azure/cosmos").CosmosClient;
 
 module.exports = {
@@ -32,6 +34,10 @@ module.exports = {
         const { resources: items } = await container.items
         .query(querySpec)
         .fetchAll();
+
+        if (items.length === 0) {
+            return null;
+        }
 
         return items[0];
     },
@@ -98,6 +104,29 @@ module.exports = {
             .replace(updatedGuardian);
     },
 
+    syncGuardianInfoWithGoogleClassroom: async function(dbClient, gcGuardianInfo) 
+    {
+        var container = dbClient.container("guardians");
+        existingGuardian = await module.exports.getItem(container, gcGuardianInfo.guardianId);
+
+        if (existingGuardian === null) {
+            this.insertGuardian(dbClient, gcGuardianInfo);
+            return;
+        }
+        var guardianOutOfSync = false;
+        if (existingGuardian.name !== gcGuardianInfo.name) {
+            existingGuardian.name = gcGuardianInfo.name;
+            guardianOutOfSync = true;
+        }
+        if (existingGuardian.Email !== gcGuardianInfo.email) {
+            existingGuardian.Email = gcGuardianInfo.email;
+            guardianOutOfSync = true;
+        }
+        if (guardianOutOfSync) {
+            this.updateGuardian(dbClient, gcGuardianInfo.guardianId, existingGuardian);
+        }
+    },
+
 
     /*
     Sample Guardian:
@@ -108,6 +137,8 @@ module.exports = {
     insertGuardian: async function(dbClient, guardian)
     {
         var containerClient = dbClient.container('guardians');
-        //Sample item
+        
+        /** Create new item * newItem is defined at the top of this file */ 
+        await containerClient.items.create(guardian);
     }
 }

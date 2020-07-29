@@ -3,11 +3,8 @@ const {google} = require('googleapis');
 
 module.exports = {
     GCInfo: class {
-        constructor(auth) {
-            if (auth == null) {
-                throw new error("User not authorized.");
-            }
-            this.classroom = google.classroom({version: 'v1', auth});
+        constructor() {
+            this.classroom = google.classroom({version: 'v1'});
         }
 
         /**
@@ -15,14 +12,15 @@ module.exports = {
          */
         getCourse() {
             classroom.courses.list({
-                pageSize: 1,
+                pageSize: 1, 
+                courseStates: 'ACTIVE'
                 }, (err, res) => {
                     if (err) return console.error('The API returned an error: ' + err);
                     const courses = res.data.courses;
                     if (courses && courses.length) {
                         return {
-                            CourseName: courses[0].name,
-                            CourseId: courses[0].id
+                            name: courses[0].name,
+                            id: courses[0].id
                         }
                     } else {
                         throw new error("User does not have access to any courses.");
@@ -33,27 +31,56 @@ module.exports = {
 
         /*
         * Input: Course ID
-        * Output: List of student IDs and their names enrolled in the course.
+        * Output: List of students in the course (student objects).
         */
         getStudentsInCourse(courseId) {
-            // TODO
+            this.classroom.courses.students.list(courseId).then((studentList) => {
+                if (studentList.nextPageToken !== "") {
+                    console.log("student list page size should be bigger.");
+                }
+                return studentList.students;
+            });
         }
 
         /*
-        * Input: Student ID
-        * Output: Guardian Info for this student.
+        * Input: Student object
+        * Output: List of guardians for this student.
         */
         getGuardianInfo(studentId) {
-            // TODO
+            this.classroom.userProfiles.guardians.list(studentId).then((guardians) => {
+                if (guardians.nextPageToken !== "") {
+                    console.log("guardians list page size should be bigger.");
+                }
+                return guardians.guardians;
+            });
         }
 
         /*
-        * Input: student ID
-        * Output: list of active assignments, their deadlines, and completion status for this student.
+        * Input: course ID
+        * Output: list of studentSubmissions for the entire course.
         */
-        getCourseworkForStudent(studentId) {
-            // TODO
+        getCourseWork(courseId) {
+            this.classroom.courses.courseWork.studentSubmissions.list(
+                {courseId: courseId, 
+                courseWorkId: "-",
+                pageSize: 1000000
+                }
+            ).then((studentSubmisions) => {
+                return studentSubmisions;
+            });
         }
 
+        /*
+        * Input: Course ID and assignment ID
+        * Output: due date and name of the assignment
+        */
+        getAssignmentInfo(courseId, courseWorkId) {
+            this.classroom.courses.courseWork.get({courseId: courseId, id: courseWorkId}).then((courseWork) => {
+                return {
+                    dueDate: courseWork.dueDate,
+                    name: courseWork.name
+                };
+            });
+        }
     }
 }
