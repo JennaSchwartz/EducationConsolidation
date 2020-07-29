@@ -19,6 +19,7 @@ block content
                             tr
                                 td=assignment.name
                                 td=assignment.status
+                                td=assignment.dueDate
                 td
                     form(action="/sendReminder", method="post")
                         button(name="sendReminderButton" value=student.name) Send Reminder to Guardian
