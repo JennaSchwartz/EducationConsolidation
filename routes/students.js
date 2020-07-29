@@ -4,11 +4,12 @@ var database = require('../public/messaging/database');
 
 router.get('/', function(req, res, next) {
   var assignment1 = {
-    AssignmentName: "Assignment1",
-    CompletionStatus: "0"
+    name: "Assignment1",
+    status: "0",
+    dueDate: "1.21.2020"
   };
   var student1 = {
-    studentName: "Jenna",
+    name: "Jenna",
     assignments: [assignment1],
     guardian: "Jenna's Mom"
   };
