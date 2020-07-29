@@ -3,8 +3,7 @@ extends layout
 block content
   h1= title
   body
-    form(action="/students", method="get")
-      button(class="save-button") Back to Students Page
+    a(href="/students") Back to Students Page
     form(action="/students/save", method="get")
       each val, key in json
         p(class='edit-info-label') !{key}:

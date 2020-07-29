@@ -25,7 +25,8 @@ h3 {
 }
 
 a {
-  color: #2b77b1;
+  color: #236191;
+  font-family: 'Inter', Arial, sans-serif;
 }
 
 .login-button {
@@ -46,7 +47,6 @@ a {
   display: block;
   font-family: 'Inter', Arial, sans-serif;
   font-size: 20px;
-  text-transform: uppercase;
   height: 50px;
   width: 260px;
   overflow: hidden;
@@ -97,7 +97,7 @@ table   {
   }
 
 thead {
-  background-color: #c5dfd8ac;
+  background-color: #5fa290ac;
  }
 
 tbody {
