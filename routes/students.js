@@ -1,25 +1,43 @@
 var express = require('express');
 var router = express.Router();var express = require('express');
 var database = require('../public/messaging/database');
+var GCInfo = require('../public/GoogleClassroomAPI/getStudentInfo');
 
-router.get('/', function(req, res, next) {
-  var assignment1 = {
-    name: "Assignment1",
-    status: "0",
-    dueDate: "1.21.2020"
-  };
-  var student1 = {
-    name: "Jenna",
-    assignments: [assignment1],
-    guardian: "Jenna's Mom"
-  };
-  var studentsAndAssignmentsObj = [student1];
+router.get('/', async function(req, res, next) {
+  var gcInfo = new GCInfo.GCInfo();
+  var course = await gcInfo.getCourse();
+  var gcStudents = await gcInfo.getStudentsInCourse(course.id);
+
+
+  var students = new Map();
+  gcStudents.forEach((student) => {
+    students[student.id] =  {
+      name: student.profile.name,
+      id: student.id,
+      assignments: []
+    }
+  });
+
+  // Get assignment info
+  var studentSubmissions = await gcInfo.getCourseWork(course.id);
+  studentSubmissions.forEach((studentSubmission) => {
+    var assignmentInfo = await gcInfo.getAssignmentInfo(course.id, studentSubmission.courseWorkId);
+    if (isLateAssignment(assignmentInfo.dueDate, studentSubmission) || !pastDue(assignmentInfo.dueDate)) {
+      students[studentSubmission.userId].assignments.push({
+        name: assignmentInfo.name,
+        status: studentSubmission.late ? "Late" : studentSubmission.state,
+        dueDate: assignmentInfo.dueDate
+      })
+    }
+  });
+
   res.render('students', {title: "Students and Assignments Page", students: studentsAndAssignmentsObj});
 });
 
 /* Edit student's guardian info. */
 router.get('/edit', async function(req, res, next) {
   var client = database.getDatabaseClient();
+  database.syncGuardianInfoWithGoogleClassroom(client, getCGGuardianInfo(req.student));
   var guardian = await database.getGuardian(client, "1");
 
   res.render('student-edit', { title: 'Edit  info', json: guardian }) 
@@ -41,3 +59,26 @@ router.get('/save', async function (req, res, next) {
 });
 
 module.exports = router;
+
+// Helper functions
+function getGCGuardianInfo(studentId) {
+      var gcGuardianInfo = await gcInfo.getGuardianInfo(studentId);
+      return gcGuardianInfo.forEach((guardianInfoObj) => {
+        return {
+          studentId: studentId,
+          id: guardianInfoObj.guardianId,
+          name: guardianInfoObj.guardianProfile.name.fullName,
+          email: guardianInfoObj.guardianProfile.emailAddress
+        };
+      });
+}
+
+function isLateAssignment(dueDate, studentSubmission) {
+  return pastDue(dueDate) && studentSubmission.late && studentSubmission.state !== "TURNED_IN" && studentSubmission.state !== "RETURNED";
+}
+
+function pastDue(dueDate) {
+  let today = new Date();
+  let dueDate = new Date(dueDate.year, dueDate.month, dueDate.day);
+  return today > dueDate;
+}
