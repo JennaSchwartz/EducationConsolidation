@@ -3,7 +3,7 @@ const CosmosClient = require("@azure/cosmos").CosmosClient;
 module.exports = {
     getDatabaseClient: function()
     {
-      // <CreateClientObjectDatabaseContainer>
+        // <CreateClientObjectDatabaseContainer>
       const connectionString = process.env.databaseConnectionString;
       const client = new CosmosClient(connectionString);
       const db = client.database("hackathon-db");
@@ -36,15 +36,30 @@ module.exports = {
         return items[0];
     },
 
-    //get all items in a table
+    getGuardianPhoneNumbers: async function(dbClient, studentId)
+    {
+        var studentsClient = dbClient.container("students")
+        student = await module.exports.getItem(studentsClient, studentId);
+          
+        var guardiansClient = dbClient.container("guardians");
+        phoneNumbers = []
+
+        for (const id of student.GuardianIds)
+        {
+            guardian = await module.exports.getItem(guardiansClient, id);
+            phoneNumbers.push(guardian.PhoneNumber);
+        }
+        
+        return phoneNumbers
+    },
+
     retrieveAll: async function(dbClient, containerName)
     {
         var containerClient = dbClient.container(containerName);
-        items = await module.exports.getItems(containerClient);
+        items = await module.exports.getItems(containerClient);0
         return items;
     },
 
-    //gets a single guardian
     retrieve: async function(dbClient, containerName, itemId)
     {
         var containerClient = dbClient.container(containerName);

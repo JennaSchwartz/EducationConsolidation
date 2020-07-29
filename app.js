@@ -7,6 +7,7 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var studentsRouter = require('./routes/students');
 var reminderRouter = require('./routes/reminder');
+const bodyParser = require('body-parser');
 
 var app = express();
 
@@ -19,10 +20,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.json());
 
 app.use('/', indexRouter);
 app.use('/students', studentsRouter);
-app.use('/reminder', reminderRouter);
+app.use('/sendReminder', reminderRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
