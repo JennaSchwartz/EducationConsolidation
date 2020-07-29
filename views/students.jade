@@ -7,21 +7,26 @@ block content
         tr
             th Student Name
             th Assignments
-            th Alerts
             th Guardian Info
+            th Alerts
     tbody
         each student in students
             tr 
                 td=student.name
                 td
-                    table(border='1')
+                    table
                         each assignment in student.assignments
                             tr
                                 td=assignment.name
+                            tr
                                 td=assignment.status
+                
+            each val, key in guardian
+                tr
+                    td guardian.val
+                    //- form(action="/students/edit", method="get")
+                    //-     button(class="edit-info-button" name="student" value=student.name) Edit Guardian Info
+
                 td
                     form(action="/sendReminder", method="post")
-                        button(name="sendReminderButton" value=student) Send Reminder to Guardian
-                td
-                    form(action="/students/edit", method="get")
-                        button(name="student" value=student.name) Edit Guardian Info
+                        button(class="send-reminder-button" name="sendReminderButton" value=student) Send Reminder to Guardian
