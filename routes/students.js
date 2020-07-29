@@ -20,7 +20,7 @@ router.get('/', async function(req, res, next) {
 
   // Get assignment info
   var studentSubmissions = await gcInfo.getCourseWork(course.id);
-  studentSubmissions.forEach((studentSubmission) => {
+  studentSubmissions.forEach(async function(studentSubmission) {
     var assignmentInfo = await gcInfo.getAssignmentInfo(course.id, studentSubmission.courseWorkId);
     if (isLateAssignment(assignmentInfo.dueDate, studentSubmission) || !pastDue(assignmentInfo.dueDate)) {
       students[studentSubmission.userId].assignments.push({
@@ -63,7 +63,7 @@ router.get('/save', async function (req, res, next) {
 module.exports = router;
 
 // Helper functions
-function getGCGuardianInfo(studentId) {
+async function getGCGuardianInfo(studentId) {
       var gcGuardianInfo = await gcInfo.getGuardianInfo(studentId);
       return gcGuardianInfo.forEach((guardianInfoObj) => {
         return {
