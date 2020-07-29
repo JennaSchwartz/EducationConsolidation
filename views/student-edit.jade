@@ -6,7 +6,7 @@ block content
     form(action="/students/save", method="get")
       each val, key in json
         p !{key}:
-        input(type='text', id=key, name=key, value=val)
+        input(class='edit-info-textbox', type='text', id=key, name=key, value=val)
         br
       br
-      input(type="submit", value="Save Guardian Info")
+      input(class="save-button" type="submit", value="Save Guardian Info")

@@ -42,3 +42,28 @@ a {
   cursor: pointer;
   margin: 0 auto;
 }
+
+.save-button {
+  display: block;
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 20px;
+  text-transform: uppercase;
+  height: 50px;
+  width: 260px;
+  overflow: hidden;
+  background: #ffffff;
+  box-shadow: 0 15px 30px rgba(black,.1);
+  border: 0;
+  cursor: pointer;
+}
+
+.edit-info-textbox {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  font-size: 20px;
+  border-radius: 2px;
+}
+
+.edit-info-label {
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 20px;
+}
