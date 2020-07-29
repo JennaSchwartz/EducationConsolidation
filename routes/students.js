@@ -41,6 +41,8 @@ router.get('/save', async function (req, res, next) {
   }
   var client = database.getDatabaseClient();
   await database.updateGuardian(client, "1", guardianInfo);
+  
+  res.render('student-edit', { title: 'Edit  info', json: guardianInfo })
 });
 
 module.exports = router;
