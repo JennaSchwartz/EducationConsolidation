@@ -9,37 +9,52 @@ const oauth2Client = new google.auth.OAuth2(
   "http://localhost:3000"
 );
 
+const scopes = [
+  'https://www.googleapis.com/auth/classroom.courses.readonly',
+  'https://www.googleapis.com/auth/classroom.rosters.readonly',
+  'https://www.googleapis.com/auth/classroom.coursework.students.readonly',
+  'https://www.googleapis.com/auth/classroom.guardianlinks.students.readonly',
+  'https://www.googleapis.com/auth/userinfo.profile',
+  'https://www.googleapis.com/auth/userinfo.email'
+];
+
 google.options({auth: oauth2Client});
 
 const TOKEN_PATH = 'token.json';
 
+async function getUserName() {
+  var person = await people.people.get({
+    resourceName: 'people/me',
+    personFields: 'names'
+  });
+
+  return person.data.names[0].displayName;
+}
+
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', async function(req, res, next) {
+    if (req.query.code != undefined) {
+      var code = req.query.code;
+      const {tokens} = await oauth2Client.getToken(code);
+      oauth2Client.setCredentials(tokens);
+      fs.writeFile(TOKEN_PATH, JSON.stringify(tokens), (err) => {
+        if (err) return console.error(err);
+        console.log('Token stored to', TOKEN_PATH);
+      });
+
+      var name = await getUserName();
+      res.render('index', { title: name });
+    }
     res.render('index', { title: 'Education Consolidation' });
 });
 
-router.post('/authenticate', function(req, res, next) {
-  var token = req.param('access_token');
-  console.log(token);
-
-  const {tokens} = oauth2Client.getToken(token);
-  
-
-  fs.writeFile(TOKEN_PATH, JSON.stringify(token), (err) => {
-    if (err) return console.error(err);
-    console.log('Token stored to', TOKEN_PATH);
+router.get('/authenticate', function(req, res, next) {
+  const authorizeUrl = oauth2Client.generateAuthUrl({
+    access_type: 'offline',
+    scope: scopes,
   });
 
-  https.get(peopleEndPoint + 'resourceName=people/me', res => {
-    res.setEncoding('utf8');
-    let body = "";
-    res.on('data', data => {
-      body += data;
-    });
-    res.on('end')
-  });
-
-  res.render('index', { title: 'Hannah!' });
+  res.redirect(authorizeUrl);
 });
 
 module.exports = router;

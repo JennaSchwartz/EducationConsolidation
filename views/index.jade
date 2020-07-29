@@ -24,26 +24,10 @@ block content
 
   script.
     var signIn = function() {
-      var oauth2Endpoint = 'https://accounts.google.com/o/oauth2/v2/auth';
-
       var form = document.createElement('form');
       form.setAttribute('method', 'GET');
-      form.setAttribute('action', oauth2Endpoint);
-
-      var params = {'client_id': '61130927439-7pjc5u470gnkbujno0glm7kqjaukq3sj.apps.googleusercontent.com',
-                    'redirect_uri': 'http://localhost:3000',
-                    'response_type': 'token',
-                    'scope': ['https://www.googleapis.com/auth/classroom.courses.readonly', 'https://www.googleapis.com/auth/classroom.courses.readonly'],
-                    'include_granted_scopes': 'true',
-                    'state': 'pass-through value'};
-
-      for (var p in params) {
-        var input = document.createElement('input');
-        input.setAttribute('type', 'hidden');
-        input.setAttribute('name', p);
-        input.setAttribute('value', params[p]);
-        form.appendChild(input);
-      }
+      form.setAttribute('action', '/authenticate');
+      console.log("got here");
 
       document.body.appendChild(form);
       form.submit();
