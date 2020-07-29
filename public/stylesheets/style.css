@@ -85,6 +85,34 @@ a {
   cursor: pointer;
 }
 
+.send-reminder-button {
+  display: block;
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 20px;
+  text-transform: uppercase;
+  height: 50px;
+  width: 260px;
+  overflow: hidden;
+  background: #ffffff;
+  box-shadow: 0 15px 30px rgba(black,.1);
+  border: 0;
+  cursor: pointer;
+}
+
+.edit-info-button {
+  display: block;
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 20px;
+  text-transform: uppercase;
+  height: 50px;
+  width: 260px;
+  overflow: hidden;
+  background: #ffffff;
+  box-shadow: 0 15px 30px rgba(black,.1);
+  border: 0;
+  cursor: pointer;
+}
+
 .edit-info-textbox {
   font-family: 'Inter', Arial, sans-serif;
   font-size: 20px;
@@ -113,7 +141,7 @@ th {
   font-family: 'Inter', Arial, sans-serif;
   text-align: left;
   font-size: 20px;
-  color:  #18181a;
+  color: #18181a;
   text-transform: uppercase;
   padding: 10px;
   text-align: center;
@@ -124,8 +152,7 @@ td {
   text-align: left;
   font-family: 'Inter', Arial, sans-serif;
   vertical-align:middle;
-  font-weight: 300;
   font-size: 15px;
-  color: #fff;
+  color:#18181a;
   border-bottom: solid 1px rgba(255,255,255,0.1);
 }

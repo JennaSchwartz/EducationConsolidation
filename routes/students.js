@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();var express = require('express');
 var database = require('../public/messaging/database');
 
-router.get('/', function(req, res, next) {
+router.get('/', async function(req, res, next) {
   var assignment1 = {
     name: "Assignment1",
     status: "0",
@@ -14,7 +14,10 @@ router.get('/', function(req, res, next) {
     guardian: "Jenna's Mom"
   };
   var studentsAndAssignmentsObj = [student1];
-  res.render('students', {title: "Students and Assignments Page", students: studentsAndAssignmentsObj});
+  var client = database.getDatabaseClient();
+  var guardian = await database.getGuardian(client, "1");
+
+  res.render('students', { title: "Students and Assignments Page", students: studentsAndAssignmentsObj, guardians: guardian });
 });
 
 /* Edit student's guardian info. */
