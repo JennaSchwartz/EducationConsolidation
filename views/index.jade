@@ -20,7 +20,7 @@ block content
       form.submit();
     }
   h1= title
-  p Welcome to #{title}
+  h3 Simplify and manage communications with your students and their parents.
 
   script.
     var signIn = function() {
@@ -48,4 +48,4 @@ block content
       document.body.appendChild(form);
       form.submit();
     }
-  button(onClick='signIn()') Sign in to Google Classrooms
+  button(class="login-button" onClick='signIn()') Sign in to Google Classroom

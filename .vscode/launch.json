@@ -10,6 +10,7 @@
     }
   ],
   "configurations": [
+  
      {
       "type": "pwa-node",
       "request": "launch",

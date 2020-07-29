@@ -15,7 +15,7 @@ const TOKEN_PATH = 'token.json';
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    res.render('index', { title: 'Education Consolidation!!' });
+    res.render('index', { title: 'Education Consolidation' });
 });
 
 router.post('/authenticate', function(req, res, next) {
