@@ -3,6 +3,7 @@ extends layout
 block content
   h1= title
   body
+    a(href="/students") Back to Students Page
     form(action="/students/save", method="get")
       each val, key in json
         p(class='edit-info-label') !{key}:
@@ -10,3 +11,4 @@ block content
         br
       br
       input(class="save-button" type="submit", value="Save Guardian Info")
+    

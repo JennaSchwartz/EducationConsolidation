@@ -2,7 +2,7 @@ extends layout
 
 block content
   h1= title
-  table(border='1')
+  table
     thead
         tr
             th Student Name
@@ -19,15 +19,17 @@ block content
                         each assignment in student.assignments
                             tr
                                 td=assignment.name
+                            tr
                                 td=assignment.status
+                            tr
                                 td=assignment.dueDate
                 td
                     table
                         each key,val in guardians
                             tr
                                 td !{key}
-                    form(action="/students/edit", method="get")
-                        button(name="student" class="edit-info-button" value=student.name) Edit Guardian Info
+                    br
+                    a(href="/students/edit") Edit Guardian Info
     
                 td
                     form(action="/sendReminder", method="post")
