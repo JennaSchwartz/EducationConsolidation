@@ -43,7 +43,7 @@ router.get('/', async function(req, res, next) {
       });
 
       var name = await getUserName();
-      res.render('index', { title: name });
+      res.render('index', { title: 'Welcome ' + name });
     }
     res.render('index', { title: 'Education Consolidation' });
 });

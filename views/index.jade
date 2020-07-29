@@ -1,24 +1,6 @@
 extends layout
 
 block content
-  script. 
-    if (window.location.href.includes('access_token')) {
-      var args = window.location.href.split('&');
-      var token = args[1].split('=')[1];
-      var form = document.createElement('form');
-
-      form.setAttribute('method', 'POST');
-      form.setAttribute('action', '/authenticate');
-
-      var input = document.createElement('input');
-      input.setAttribute('type', 'hidden');
-      input.setAttribute('name', 'access_token');
-      input.setAttribute('value', token);
-      form.appendChild(input);
-
-      document.body.appendChild(form);
-      form.submit();
-    }
   h1= title
   h3 Simplify and manage communications with your students and their parents.
 
@@ -27,9 +9,19 @@ block content
       var form = document.createElement('form');
       form.setAttribute('method', 'GET');
       form.setAttribute('action', '/authenticate');
-      console.log("got here");
+
+      document.body.appendChild(form);
+      form.submit();
+    }
+
+    var goToStudents = function() {
+      var form = document.createElement('form');
+      form.setAttribute('method', 'GET');
+      form.setAttribute('action', '/students');
 
       document.body.appendChild(form);
       form.submit();
     }
   button(class="login-button" onClick='signIn()') Sign in via Google Classroom
+  h3
+  button(class="login-button" onClick='goToStudents()') View students in your classroom
