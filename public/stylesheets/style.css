@@ -58,9 +58,9 @@ a {
 }
 
 .edit-info-textbox {
-  font-family: 'Segoe UI', Arial, sans-serif;
+  font-family: 'Inter', Arial, sans-serif;
   font-size: 20px;
-  border-radius: 2px;
+  border-radius: 4px;
 }
 
 .edit-info-label {

@@ -5,7 +5,7 @@ block content
   body
     form(action="/students/save", method="get")
       each val, key in json
-        p !{key}:
+        p(class='edit-info-label') !{key}:
         input(class='edit-info-textbox', type='text', id=key, name=key, value=val)
         br
       br
