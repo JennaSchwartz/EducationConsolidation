@@ -6,7 +6,7 @@ const people = google.people('v1');
 const oauth2Client = new google.auth.OAuth2(
   "61130927439-7pjc5u470gnkbujno0glm7kqjaukq3sj.apps.googleusercontent.com",
   "yxugvrPODS2_XIXZh815fMMj",
-  "https://edu-consolidation.azurewebsites.net"
+  "https://edu-consolidation.azurewebsites.net" // If testing locally, change this url to http://localhost:3000 but make sure not to check it in!
 );
 
 const scopes = [
