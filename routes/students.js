@@ -16,8 +16,14 @@ router.get('/', async function(req, res, next) {
   var studentsAndAssignmentsObj = [student1];
   var client = database.getDatabaseClient();
   var guardian = await database.getGuardian(client, "1");
+  var guardianEssentialInfo = {
+    name: guardian.Name,
+    phonenumber: guardian.PhoneNumber,
+    email: guardian.Email,
+    lang: guardian.PreferredLanguage
+  };
 
-  res.render('students', { title: "Students and Assignments Page", students: studentsAndAssignmentsObj, guardians: guardian });
+  res.render('students', { title: "Students and Assignments Page", students: studentsAndAssignmentsObj, guardians: guardianEssentialInfo });
 });
 
 /* Edit student's guardian info. */
