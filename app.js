@@ -25,6 +25,8 @@ app.use(bodyParser.json());
 app.use('/', indexRouter);
 app.use('/students', studentsRouter);
 app.use('/sendReminder', reminderRouter);
+app.use('/favicon.ico', express.static('public/images/favicon.ico'));
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -6,7 +6,7 @@ const people = google.people('v1');
 const oauth2Client = new google.auth.OAuth2(
   "61130927439-7pjc5u470gnkbujno0glm7kqjaukq3sj.apps.googleusercontent.com",
   "yxugvrPODS2_XIXZh815fMMj",
-  "http://localhost:3000"
+  "https://edu-consolidation.azurewebsites.net"
 );
 
 const scopes = [
@@ -43,9 +43,9 @@ router.get('/', async function(req, res, next) {
       });
 
       var name = await getUserName();
-      res.render('index', { title: name });
+      res.render('index', { title: 'Education Consolidation', signInText: 'Welcome, ' + name });
     }
-    res.render('index', { title: 'Education Consolidation' });
+    res.render('index', { title: 'Education Consolidation', signInText: 'Sign in via Google Classroom' });
 });
 
 router.get('/authenticate', function(req, res, next) {

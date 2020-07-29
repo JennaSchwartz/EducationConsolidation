@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:600');
-@import url("https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap&family=Gochi+Hand&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@500");
 
 
@@ -8,6 +8,7 @@ body {
   background-image: url('../images/background-removebg.png');
   margin: 0;
   padding: 50px;
+  text-align: center;
 } 
 
 h1 {
@@ -25,64 +26,57 @@ h3 {
 }
 
 a {
-  color: #00B7FF;
+  color: #236191;
+  font-family: 'Inter', Arial, sans-serif;
 }
 
 .login-button {
-  display: block;
+  display: inline-block;
   font-family: 'Inter', Arial, sans-serif;
   font-size: 20px;
-  text-transform: uppercase;
   height: 60px;
   width: 300px;
   overflow: hidden;
   background: #ffffff;
   box-shadow: 0 15px 30px rgba(black,.1);
-  border: 0;
+  border: 1;
   cursor: pointer;
-  margin: 0 auto;
+  margin: 20px;
+  vertical-align: middle;
 }
 
 .save-button {
   display: block;
   font-family: 'Inter', Arial, sans-serif;
   font-size: 20px;
-  text-transform: uppercase;
   height: 50px;
   width: 260px;
   overflow: hidden;
-  background: #ffffff;
+  background: #dddddd;
   box-shadow: 0 15px 30px rgba(black,.1);
-  border: 0;
+  border: 1;
   cursor: pointer;
 }
 
 .send-reminder-button {
   display: block;
   font-family: 'Inter', Arial, sans-serif;
-  font-size: 20px;
-  text-transform: uppercase;
+  font-size: 15px;
   height: 50px;
-  width: 260px;
+  width: 220  px;
   overflow: hidden;
-  background: #ffffff;
-  box-shadow: 0 15px 30px rgba(black,.1);
-  border: 0;
+  background: #dddddd;
+  border: 1;
   cursor: pointer;
 }
 
 .edit-info-button {
   display: block;
   font-family: 'Inter', Arial, sans-serif;
-  font-size: 20px;
-  text-transform: uppercase;
-  height: 50px;
-  width: 260px;
-  overflow: hidden;
-  background: #ffffff;
-  box-shadow: 0 15px 30px rgba(black,.1);
-  border: 0;
-  cursor: pointer;
+  font-size: 15px;
+  margin: 0;
+  background: #85c6b2c6;
+  border: transparent;
 }
 
 .edit-info-textbox {
@@ -96,13 +90,19 @@ a {
   font-size: 20px;
 }
 
+.button-collection {
+  text-align: center;
+}
+
 table   {
     width:100%;
     table-layout: fixed;
+    border-radius:3px;
+    border: 1;
   }
 
 thead {
-  background-color: #c5dfd8ac;
+  background-color: #5fa290ac;
  }
 
 tbody {
@@ -113,7 +113,7 @@ th {
   font-family: 'Inter', Arial, sans-serif;
   text-align: left;
   font-size: 20px;
-  color:  #18181a;
+  color: #18181a;
   text-transform: uppercase;
   padding: 10px;
   text-align: center;
@@ -124,8 +124,7 @@ td {
   text-align: left;
   font-family: 'Inter', Arial, sans-serif;
   vertical-align:middle;
-  font-weight: 300;
   font-size: 15px;
-  color: #fff;
+  color:#18181a;
   border-bottom: solid 1px rgba(255,255,255,0.1);
 }

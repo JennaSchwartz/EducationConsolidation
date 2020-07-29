@@ -11,10 +11,6 @@ var http = require('http');
 /**
  * Local values for secrets
  */
-process.env.twilioAccountSid = "<ACCOUNT_SID>";
-process.env.twilioAuthToken = "<AUTH_TOKEN>";
-process.env.twilioToPhoneNumber = "<PHONENUMBER>";
-process.env.twilioFromPhoneNumber = "<PHONENUMBER>";
 process.env.databaseConnectionString = "AccountEndpoint=https://educon-test-db.documents.azure.com:443/;AccountKey=ZZkOY11KzyCp5S9VR5NfcVO7z8LeUUX3phmw30BkxHeJnH3GxxqWU9xnFInRoaTYAkE60a38Y2WGx9xF361KGw==;";
 
 /**

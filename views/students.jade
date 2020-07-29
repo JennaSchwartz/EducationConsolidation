@@ -2,27 +2,35 @@ extends layout
 
 block content
   h1= title
-  table(border='1')
+  table
     thead
         tr
             th Student Name
             th Assignments
-            th Alerts
             th Guardian Info
+            th Alerts
     tbody
+        tr
         each student in students
             tr 
                 td=student.name
                 td
-                    table(border='1')
+                    table
                         each assignment in student.assignments
                             tr
                                 td=assignment.name
+                            tr
                                 td=assignment.status
+                            tr
                                 td=assignment.dueDate
                 td
-                    form(action="/sendReminder", method="post")
-                        button(name="sendReminderButton" value=student.name) Send Reminder to Guardian
+                    table
+                        each key,val in guardians
+                            tr
+                                td !{key}
+                    br
+                    a(href="/students/edit") Edit Guardian Info
+    
                 td
                     form(action="/students/edit", method="get")
                         button(name="student" value=student.id) Edit Guardian Info

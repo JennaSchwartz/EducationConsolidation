@@ -10,21 +10,25 @@ router.post('/', async function(req, res) {
   var client = database.getDatabaseClient();
   var guardianPhoneNumbers = await database.getGuardianPhoneNumbers(client, studentId);
   guardianPhoneNumbers.forEach(pn => {
-    twilio.sendMessage("Your student is failing the class!", pn);
+    twilio.sendMessage("Check your student's assignments on Google Classroom", pn);
   });
   console.log(guardianPhoneNumbers);
 
   var assignment1 = {
-    AssignmentName: "Assignment1",
-    CompletionStatus: "0"
+    name: "Assignment1",
+    status: "0",
+    dueDate: "1.21.2020"
   };
   var student1 = {
-    studentName: "Jenna",
+    name: "Jenna",
     assignments: [assignment1],
     guardian: "Jenna's Mom"
   };
   var studentsAndAssignmentsObj = [student1];
-  res.render('students', {title: "Students and Assignments Page", students: studentsAndAssignmentsObj});
+  var client = database.getDatabaseClient();
+  var guardian = await database.getGuardian(client, "1");
+
+  res.render('students', { title: "Students and Assignments Page", students: studentsAndAssignmentsObj, guardians: guardian });
 });
 
 module.exports = router;
