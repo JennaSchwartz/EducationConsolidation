@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();var express = require('express');
+var database = require('../public/messaging/database');
 
 router.get('/', function(req, res, next) {
   var assignment1 = {
@@ -16,19 +17,26 @@ router.get('/', function(req, res, next) {
 });
 
 /* Edit student's guardian info. */
-router.get('/edit', function(req, res, next) {
-  var student1 = {
-    studentName: "Sana",
-    guardian1Name: "Sana's mom",
-    guardian1Email: "sanasmom@msn.com",
-    guardian1Number: "123-456-7890",
-    guardian1Language: ["English"],
-    guardian2Name: "Sana's dad",
-    guardian2Email: "Sanasdad@gmail.com",
-    guardian2Number: "098-765-4321",
-    guardian2Language: ["Hindi ", "English"]
-  };
-  res.render('student-edit', { title: 'Edit student info', json: student1 }) 
+router.get('/edit', async function(req, res, next) {
+  var client = database.getDatabaseClient();
+  var guardian = await database.getGuardian(client, "1");
+
+  res.render('student-edit', { title: 'Edit  info', json: guardian }) 
 
 });
+
+/* Save student's guardian info. */
+router.get('/save', async function (req, res, next) {
+  var guardianInfo = 
+  {
+    Name: req.query.Name,
+    Email: req.query.Email,
+    PhoneNumber: req.query.PhoneNumber,
+    PreferredLanguage: req.query.PreferredLanguage,
+    PreferredContactMethod: req.query.PreferredContactMethod
+  }
+  var client = database.getDatabaseClient();
+  await database.updateGuardian(client, "1", guardianInfo);
+});
+
 module.exports = router;
