@@ -32,7 +32,7 @@ router.get('/', async function(req, res, next) {
     }
   });
 
-  res.render('students', {title: "Students and Assignments Page", students: studentsAndAssignmentsObj});
+  res.render('students', {title: "View Students & Assignments", students: studentsAndAssignmentsObj});
 });
 
 /* Edit student's guardian info. */

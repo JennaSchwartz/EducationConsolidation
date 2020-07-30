@@ -6,8 +6,8 @@ block content
     a(href="/students") Back to Students Page
     form(action="/students/save", method="get")
       each val, key in json
-        p(class='edit-info-label') !{key}:
-        input(class='edit-info-textbox', type='text', id=key, name=key, value=val)
+        p(class="edit-info-label") !{key}:
+        input(class="edit-info-textbox" type="text" id=key name=key value=val)
         br
       br
       input(class="save-button" type="submit", value="Save Guardian Info")
