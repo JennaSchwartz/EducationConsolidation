@@ -19,7 +19,7 @@ module.exports = {
                 };
             }
             else {
-                console.log("Error calling coursework API");
+                console.log("Error in getCourse()");
             }
         }
 
@@ -27,54 +27,59 @@ module.exports = {
         * Input: Course ID
         * Output: List of students in the course (student objects).
         */
-        getStudentsInCourse(courseId) {
-            this.classroom.courses.students.list(courseId).then((studentList) => {
-                if (studentList.nextPageToken !== "") {
-                    console.log("student list page size should be bigger.");
-                }
-                return studentList.students;
-            });
+        async getStudentsInCourse(courseId) {
+            var res = await this.classroom.courses.students.list({courseId: courseId});
+            return res.data.students;
         }
 
         /*
         * Input: Student object
         * Output: List of guardians for this student.
         */
-        getGuardianInfo(studentId) {
-            this.classroom.userProfiles.guardians.list(studentId).then((guardians) => {
-                if (guardians.nextPageToken !== "") {
-                    console.log("guardians list page size should be bigger.");
-                }
-                return guardians.guardians;
-            });
+        async getGuardianInfo(studentId) {
+            var res = await this.classroom.userProfiles.guardians.list(studentId);
+            if (res.guardians.nextPageToken !== "") {
+                console.log("guardians list page size should be bigger.");
+            }
+            return res.guardians.guardians;
         }
 
         /*
         * Input: course ID
         * Output: list of studentSubmissions for the entire course.
         */
-        getCourseWork(courseId) {
-            this.classroom.courses.courseWork.studentSubmissions.list(
-                {courseId: courseId, 
+        async getCourseWork(courseId) {
+            var res = await this.classroom.courses.courseWork.studentSubmissions.list({
+                courseId: courseId,
                 courseWorkId: "-",
                 pageSize: 1000000
-                }
-            ).then((studentSubmisions) => {
-                return studentSubmisions;
             });
+            if (res.data && res.data.studentSubmissions) {
+                return res.data.studentSubmissions;
+            }
+            else {
+                console.log("Error in getCourseWork()");
+            }
         }
 
         /*
         * Input: Course ID and assignment ID
         * Output: due date and name of the assignment
         */
-        getAssignmentInfo(courseId, courseWorkId) {
-            this.classroom.courses.courseWork.get({courseId: courseId, id: courseWorkId}).then((courseWork) => {
-                return {
-                    dueDate: courseWork.dueDate,
-                    name: courseWork.name
-                };
+        async getAssignmentInfo(courseId, courseWorkId) {
+            var res = await this.classroom.courses.courseWork.get({
+                courseId: courseId,
+                id: courseWorkId
             });
+            if (res.data && res.data.courseWork) {
+                return {
+                    dueDate: res.data.courseWork.dueDate,
+                    name: res.data.courseWork.name
+                };
+            }
+            else {
+                console.log("Error in getAssignmentInfo()");
+            }
         }
     }
 }

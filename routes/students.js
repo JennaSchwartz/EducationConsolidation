@@ -9,7 +9,7 @@ router.get('/', async function(req, res, next) {
   console.log(course);
   var gcStudents = await gcInfo.getStudentsInCourse(course.id);
 
-
+  // next build error occurs here
   var students = new Map();
   gcStudents.forEach((student) => {
     students[student.id] =  {
