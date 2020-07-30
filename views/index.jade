@@ -27,40 +27,40 @@ block content
     button(class="login-button" onClick='signIn()')= signInText
     button(class="login-button" onClick='goToStudents()') View students in your classroom
 
-  button(id="modalBtn" name="sendReminderButton" class="send-reminder-button") Send Reminder to Guardian
-  div.modal#simpleModal
-    div.modal-content
-      span.closeBtn x
-      form
-        textarea(type="text" class="edit-info-textbox" name="guardianmessage") Check your student's assignment on Google Classroom
-        br
-        br
-        button(id="modalBtn" name="sendReminderButton" class="send-reminder-button2") Send Reminder to Guardian
+  //- button(id="modalBtn" name="sendReminderButton" class="send-reminder-button") Send Reminder to Guardian
+  //- div.modal#simpleModal
+  //-   div.modal-content
+  //-     span.closeBtn x
+  //-     form
+  //-       textarea(type="text" class="edit-info-textbox" name="guardianMessage") Check your student's assignment on Google Classroom
+  //-       br
+  //-       br
+  //-       button(id="modalBtn" name="sendReminderButton" class="send-reminder-button-centered") Send Reminder to Guardian
   
-  script.
-    //get modal open close buttnos
-    var modal = document.getElementById('simpleModal');
-    var modalBtn = document.getElementById('modalBtn');
-    var closeBtn = document.getElementsByClassName('closeBtn')[0];
+  //- script.
+  //-   //get modal open close buttnos
+  //-   var modal = document.getElementById('simpleModal');
+  //-   var modalBtn = document.getElementById('modalBtn');
+  //-   var closeBtn = document.getElementsByClassName('closeBtn')[0];
     
-    //Event Listeners
-    modalBtn.addEventListener('click', openModal);
-    closeBtn.addEventListener('click', closeModal);
-    window.addEventListener('click', outsideClick);
+  //-   //Event Listeners
+  //-   modalBtn.addEventListener('click', openModal);
+  //-   closeBtn.addEventListener('click', closeModal);
+  //-   window.addEventListener('click', outsideClick);
     
-    function openModal(){
-        modal.style.display = 'block';
-    }
+  //-   function openModal(){
+  //-       modal.style.display = 'block';
+  //-   }
     
-    function closeModal(){
-        modal.style.display = 'none';
-    }
+  //-   function closeModal(){
+  //-       modal.style.display = 'none';
+  //-   }
     
-    function outsideClick(e){
-        if(e.target == modal){
-            modal.style.display = 'none';
-        }
-    }
+  //-   function outsideClick(e){
+  //-       if(e.target == modal){
+  //-           modal.style.display = 'none';
+  //-       }
+  //-   }
 
 
 

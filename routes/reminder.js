@@ -28,7 +28,7 @@ router.post('/', async function(req, res) {
   var client = database.getDatabaseClient();
   var guardian = await database.getGuardian(client, "1");
 
-  res.render('students', { title: "Students and Assignments Page", students: studentsAndAssignmentsObj, guardians: guardian });
+  res.render('students', { title: "View Students & Assignments", students: studentsAndAssignmentsObj, guardians: guardian });
 });
 
 module.exports = router;
