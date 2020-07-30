@@ -6,6 +6,7 @@ var GCInfo = require('../public/GoogleClassroomAPI/getStudentInfo');
 router.get('/', async function(req, res, next) {
   var gcInfo = new GCInfo.GCInfo();
   var course = await gcInfo.getCourse();
+  console.log(course);
   var gcStudents = await gcInfo.getStudentsInCourse(course.id);
 
 
@@ -81,6 +82,5 @@ function isLateAssignment(dueDate, studentSubmission) {
 
 function pastDue(dueDate) {
   let today = new Date();
-  let dueDate = new Date(dueDate.year, dueDate.month, dueDate.day);
   return today > dueDate;
 }

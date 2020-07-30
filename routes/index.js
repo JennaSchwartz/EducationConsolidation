@@ -1,12 +1,14 @@
 var express = require('express');
 var router = express.Router();
 var fs = require('fs');
+
+var GCInfo = require('../public/GoogleClassroomAPI/getStudentInfo');
 const {google} = require('googleapis');
 const people = google.people('v1');
 const oauth2Client = new google.auth.OAuth2(
   "61130927439-7pjc5u470gnkbujno0glm7kqjaukq3sj.apps.googleusercontent.com",
   "yxugvrPODS2_XIXZh815fMMj",
-  "https://edu-consolidation.azurewebsites.net" // If testing locally, change this url to http://localhost:3000 but make sure not to check it in!
+  "http://localhost:3000" // If testing locally, change this url to http://localhost:3000 but make sure not to check it in!
 );
 
 const scopes = [
@@ -35,13 +37,13 @@ async function getUserName() {
 router.get('/', async function(req, res, next) {
     if (req.query.code != undefined) {
       var code = req.query.code;
+      console.log(code);
       const {tokens} = await oauth2Client.getToken(code);
       oauth2Client.setCredentials(tokens);
       fs.writeFile(TOKEN_PATH, JSON.stringify(tokens), (err) => {
         if (err) return console.error(err);
         console.log('Token stored to', TOKEN_PATH);
       });
-
       var name = await getUserName();
       res.render('index', { title: 'Education Consolidation', signInText: 'Welcome, ' + name });
     }

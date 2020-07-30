@@ -10,23 +10,17 @@ module.exports = {
         /**
          * Lists the course that the user has access to.
          */
-        getCourse() {
-            this.classroom.courses.list({
-                pageSize: 1, 
-                courseStates: 'ACTIVE'
-                }, (err, res) => {
-                    if (err) return console.error('The API returned an error: ' + err);
-                    const courses = res.data.courses;
-                    if (courses && courses.length) {
-                        return {
-                            name: courses[0].name,
-                            id: courses[0].id
-                        }
-                    } else {
-                        throw new error("User does not have access to any courses.");
-                    }
-                }
-            );
+        async getCourse() {
+            var resp = await this.classroom.courses.list({pageSize: 1, courseStates: 'ACTIVE'});
+            if (resp.data != undefined && resp.data.courses != undefined) {
+                return {
+                    name: resp.data.courses[0].name,
+                    id: resp.data.courses[0].id
+                };
+            }
+            else {
+                console.log("Error calling coursework API");
+            }
         }
 
         /*
